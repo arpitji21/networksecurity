@@ -1,3 +1,10 @@
 python-dotenv
 pandas
 numpy
+pymongo
+certifi
+
+# -e .
+
+## this -e . is helps in referring to the setup.py
+## when we write the pip install -r requiremnts.txt it will refer to setup.py
