@@ -1,7 +1,7 @@
 from datetime import datetime
 import os
 
-from networksecurity.constant.training_pipeline import training_pipeline
+import networksecurity.constant.training_pipeline as training_pipeline
 
 print(training_pipeline.PIPELINE_NAME)
 print(training_pipeline.ARTIFACT_DIR)
