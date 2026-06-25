@@ -34,6 +34,9 @@ from sklearn.ensemble import (
 import mlflow
 import mlflow.sklearn
 
+import dagshub
+dagshub.init(repo_owner='arpitji21', repo_name='networksecurity', mlflow=True)
+
 
 class ModelTrainer:
     def __init__(self,model_trainer_config: ModelTrainerConfig,data_transformation_artifact: DataTransformationArtifact):
@@ -74,20 +77,20 @@ class ModelTrainer:
             },
 
             "Random Forest": {
-                'n_estimators': [8, 16, 32, 64, 128, 256]
+                'n_estimators': [8, 16, 32, 128, 256]
             },
 
             "Gradient Boosting": {
-                'learning_rate': [.1, .01, .05, .001],
-                'subsample': [0.6, 0.7, 0.75, 0.8, 0.85, 0.9],
-                'n_estimators': [8, 16, 32, 64, 128, 256]
+                'learning_rate': [.1, .01, .001],
+                'subsample': [0.6, 0.7, 0.85, 0.9],
+                'n_estimators': [8, 16, 32, 128, 256]
             },
 
             "Logistic Regression": {},
 
             "Adaboost": {
-                'learning_rate': [.1, .01, .05, .001],
-                'n_estimators': [8, 16, 32, 64, 128, 256]
+                'learning_rate': [.1, .01,  .001],
+                'n_estimators': [8, 16, 32, 128, 256]
             }
         }
 
@@ -151,6 +154,10 @@ class ModelTrainer:
             self.model_trainer_config.trained_model_file_path,
             obj=Network_Model
         )
+
+        save_object("final_model/model.pkl",best_model)
+
+
 
         model_trainer_artifact = ModelTrainerArtifact(
             trained_model_file_path=self.model_trainer_config.trained_model_file_path,
